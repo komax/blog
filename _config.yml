@@ -4,8 +4,8 @@ email: maximilian.konzack@idiv.de
 description: >- # this means to ignore newlines until "baseurl:"
   A blog about wrangling data, crafting code and communicating open science.
   Feel free to subscribe the feed.xml.
-baseurl: "blog" # the subpath of your site, e.g. /blog
-url: "https://komax.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: '' # the subpath of your site, e.g. /blog
+url: "https://komax.github.io/blog" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  komax
 
 # Build settings
