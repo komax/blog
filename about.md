@@ -3,16 +3,18 @@ layout: page
 title: About
 permalink: /about/
 ---
+I am [Maximilian Konzack](https://komax.github.io/), a computer scientist who works as a postdoctoral researcher at iDiv. I am keen on many topics: I like programming and  research the best when it's put into code. My interests include:
+ * visual analytics
+ * programming
+ * algorithm engineering
+ * visualization
+ * open source
+ * movement ecology
+ * text mining
+ * biodiversity
+ * programming languages
+ * tinkering with Raspberry Pis and microcontrollers.
+  
+If you want to get in contact, please drop me an email.
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
-
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
+Thank you for your time reading my posts.
