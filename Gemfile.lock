@@ -203,6 +203,9 @@ GEM
       jekyll (~> 3.5)
       jekyll-feed (~> 0.9)
       jekyll-seo-tag (~> 2.1)
+    minima-reboot (1.0.26)
+      jekyll (~> 3.6)
+      jekyll-seo-tag (~> 2.1)
     minitest (5.11.3)
     multipart-post (2.0.0)
     nokogiri (1.8.4)
@@ -245,8 +248,8 @@ DEPENDENCIES
   github-pages
   jekyll
   jekyll-feed (~> 0.6)
-  minima (~> 2.0)
+  minima-reboot (~> 1.0.26)
   tzinfo-data
 
 BUNDLED WITH
-   1.16.4
+   2.0.2
