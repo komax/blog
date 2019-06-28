@@ -36,76 +36,154 @@ which makes the GROBID service available on port ```8070```.
 
 How to use GROBID
 ==
-GROBID offer a web user interface to interactively use the tool. 
-Open <http://localhost:8070> in your browser to do so.
+GROBID offers a web user interface to interactively submit pdfs. In addition, you can submit your pdfs via a REST api, such as curl or clients from GROBID.
 
-We use [this open access publication](https://www.pnas.org/content/105/49/19052/) for demonstrating GROBID:
+To use the web interface, open <http://localhost:8070> in your browser to do so.
+We use [this open access publication](https://www.pnas.org/content/105/49/19052/) in the following:
 ```
 Nathan, R., Getz, W. M., Revilla, E., Holyoak, M., Kadmon, R., Saltz, D., & Smouse, P. E. (2008). A movement ecology paradigm for unifying organismal movement research. Proceedings of the National Academy of Sciences, 105(49), 19052-19059.
 ```
-I presume this paper is in your home directory stored as ```papers/nathan_2009_movement_ecology.pdf```
+I presume this paper is in your home directory stored as ```papers/nathan_2009_movement_ecology.pdf```.
+
+Then, clicking ```TEI``` and uploading the pdf should yield the following:
+![grobid-web-ui](/assets/images/grobid/grobid_webui.png){: width="600px"}
+
+You can decide whether you want to 
+ * retrieve the paper's header (```Process Header Document```)
+ * get the paper's entire full text (```Process Fulltext Document```)
+ * or obtain just the paper's references (```Process All References```)
 
 
+After completing generatimg the xml document, you can either inspect the document or download it:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /home/max/code/grobid/grobid-home/schemas/xsd/Grobid.xsd" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <teiHeader xml:lang="en">
+    <encodingDesc>
+      <appInfo>
+        <application version="0.5.4" ident="GROBID" when="2019-06-28T15:47+0000">
+          <ref target="https://github.com/kermitt2/grobid">GROBID - A machine learning software for extracting information from scholarly documents</ref>
+        </application>
+      </appInfo>
+    </encodingDesc>
+    <fileDesc>
+      <titleStmt>
+        <title level="a" type="main">A movement ecology paradigm for unifying organismal movement research</title>
+      </titleStmt>
+      <publicationStmt>
+        <publisher>Proceedings of the National Academy of Sciences</publisher>
+        <availability status="unknown">
+          <p>Copyright Proceedings of the National Academy of Sciences</p>
+        </availability>
+        <date type="published" when="2008-12-09">2008-12-09</date>
+      </publicationStmt>
+      <sourceDesc>
+        <biblStruct>
+          <analytic>
+            <author>
+              <persName xmlns="http://www.tei-c.org/ns/1.0">
+                <forename type="first">R</forename>
+                <surname>Nathan</surname>
+              </persName>
+            </author>
+            <author>
+              <persName xmlns="http://www.tei-c.org/ns/1.0">
+                <forename type="first">W</forename>
+                <forename type="middle">M</forename>
+                <surname>Getz</surname>
+              </persName>
+            </author>
+            <author>
+              <persName xmlns="http://www.tei-c.org/ns/1.0">
+                <forename type="first">E</forename>
+                <surname>Revilla</surname>
+              </persName>
+            </author>
+            <author>
+              <persName xmlns="http://www.tei-c.org/ns/1.0">
+                <forename type="first">M</forename>
+                <surname>Holyoak</surname>
+              </persName>
+            </author>
+            <author>
+              <persName xmlns="http://www.tei-c.org/ns/1.0">
+                <forename type="first">R</forename>
+                <surname>Kadmon</surname>
+              </persName>
+            </author>
+            <author>
+              <persName xmlns="http://www.tei-c.org/ns/1.0">
+                <forename type="first">D</forename>
+                <surname>Saltz</surname>
+              </persName>
+            </author>
+            <author>
+              <persName xmlns="http://www.tei-c.org/ns/1.0">
+                <forename type="first">P</forename>
+                <forename type="middle">E</forename>
+                <surname>Smouse</surname>
+              </persName>
+            </author>
+            <title level="a" type="main">A movement ecology paradigm for unifying organismal movement research</title>
+          </analytic>
+          <monogr>
+            <title level="j" type="main">Proceedings of the National Academy of Sciences</title>
+            <title level="j" type="abbrev">Proceedings of the National Academy of Sciences</title>
+            <idno type="ISSN">0027-8424</idno>
+            <idno type="eISSN">1091-6490</idno>
+            <imprint>
+              <publisher>Proceedings of the National Academy of Sciences</publisher>
+              <biblScope unit="volume">105</biblScope>
+              <biblScope unit="issue">49</biblScope>
+              <biblScope unit="page" from="19052" to="19059"/>
+              <date type="published" when="2008-12-09"/>
+            </imprint>
+          </monogr>
+          <idno type="DOI">10.1073/pnas.0800375105</idno>
+          <note type="submission">Edited by James H. Brown, University of New Mexico, Albequerque, NM, and approved June 25, 2008 (received for review March 13, 2008)</note>
+        </biblStruct>
+      </sourceDesc>
+    </fileDesc>
+    <profileDesc>
+      <abstract>
+        <p>Movement of individual organisms is fundamental to life, quilting our planet in a rich tapestry of phenomena with diverse implications for ecosystems and humans. Movement research is both plentiful and insightful, and recent methodological
+          advances facilitate obtaining a detailed view of individual movement. Yet, we lack a general unifying paradigm, derived from first principles, which can place movement studies within a common context and advance the development of a mature scientific
+          discipline. This introductory article to the Movement Ecology Special Feature proposes a paradigm that integrates conceptual, theoretical, methodological, and empirical frameworks for studying movement of all organisms, from microbes to trees to
+          elephants. We introduce a conceptual framework depicting the interplay among four basic mechanistic components of organismal movement: the internal state (why move?), motion (how to move?), and navigation (when and where to move?) capacities of the
+          individual and the external factors affecting movement. We demonstrate how the proposed framework aids the study of various taxa and movement types; promotes the formulation of hypotheses about movement; and complements existing biomechanical,
+          cognitive, random, and optimality paradigms of movement. The proposed framework integrates eclectic research on movement into a structured paradigm and aims at providing a basis for hypothesis generation and a vehicle facilitating the understanding
+          of the causes, mechanisms, and spatiotemporal patterns of movement and their role in various ecological and evolutionary processes. &apos;&apos;Now we must consider in general the common reason for moving with any movement whatever.&apos;&apos;
+          (Aristotle, De Motu Animalium, 4th century B.C.) motion capacity navigation capacity migration dispersal foraging</p>
+      </abstract>
+    </profileDesc>
+  </teiHeader>
+  <text xml:lang="en"></text>
+</TEI>
+```
+This document contains already a lot of information about the publication!
+So what is TEI? TEI is a standard with [guidelines on how to encode digital texts](https://www.tei-c.org/release/doc/tei-p5-doc/en/html/index.html), as its name Text Encoding Initative already hints. I'll cover parsing TEI files in another post.
 
+RESTful GROBID
+===
+If you have many articles, it becomes handy to output the XML documents in an automated way. To do so, we use a REST API. First, let's obtain the same XML by using ```curl```:
+```bash
+$ curl -v --form input=@./nathan_2009_movement_ecology.pdf  localhost:8070/api/processHeaderDocument
+```
+
+Of course, it's possible to write your own client submit such requests, but GROBID already offers clients in Java, Python and JavaScript to handle a folder of multiple pdfs at the same time. Let's use the [Python client](https://github.com/kermitt2/grobid-client-python):
+```bash
+$ python3 grobid-client.py --n 3 --input ~/papers  --output ~/tei_papers  processFulltextDocument
+```
+
+The command will concurrently generate TEI xml documents for all PDFs in ```~/papers```. The output will be in ```~/tei_papers```. ```--n 3``` controls how many threads we are using.
+
+After this tutorial, I give a brief overview over an application using GROBID internally.
 
 Application of GROBID: RobotReviewer
 ===
+
 Systematic reviews have an important role in clinical trials. One aspect of such reviews is the risk of bias assessment in form of the [PICO (population, intervention, comparators and outcomes) scheme](https://en.wikipedia.org/wiki/PICO_process).
 Automatic reports compiled from publications can be a help to identify how individual papers fall into a PICO scheme. RobotReviewer analyzes such trail characteristics and generates an evidence report.
 
 RobotReviewer internally uses GROBID to generate textual information from PDFs.
 
-
-
-
-Hi there,
-I am Max and thank you for your time checking out my new blog about code, data and open science. In this blogpost, I will give a brief overview about me and this blog's objective.
-
-Who
-====
-I am [Maximilian Konzack](https://komax.github.io/), a computer scientist employed as a postdoctoral researcher at [iDiv, the German Centre for Integrative Biodiversity Research Halle-Jena-Leipzig](https://www.idiv.de/en.html). I am keen on many topics: I like programming and research the best when it's put into code. My interests include:
- * visual analytics
- * programming
- * algorithm engineering
- * visualization
- * open source
- * movement ecology
- * text mining
- * biodiversity
- * programming languages
- * tinkering with Raspberry Pis and microcontrollers.
-
-Why
-====
-Why, yet another blog? Blogs allow people to share their knowledge and to pass it in an accessible and casual way to others. I think this is great and I love reading many, many blogs of others. I'd guess I'll post about my most favorite blogs in the near future.
-
-Secondly, I want to report on some interesting stuff and insights which came along while working on the topics above in a rather casual writings.
-
-What are the topics and what is the objective?
-===
-Cross-cutting topics revolving around computer science and means to gain knowledge from data and visual representations of data.
-
-I will pinpoint the topics as this blog matures. They will appear pretty scattered in the beginning, but there will be always something about science, coding and data.
-
-
-
-How and when?
-===
-I'll drop a post every other week, but those promises for blogs are probably the same as for adhering to New Year's resolutions.
-
-I do my best to have at least a post within two weeks.
-
-
-Thank you
-===
-This is it, my first post.
-
-Feel free to subscribe to the RSS feed if you want to automatically get the latest posts.
-
-  
-If you want to get in contact, please drop me an email.
-
-
-```bash
-$ python3 grobid-client.py --n 3 --input ~/papers --output ~/tei_papers processFulltextDocument
-```
