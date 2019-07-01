@@ -5,17 +5,17 @@ date:   2019-06-28 13:00:09 +0200
 categories: text mining
 ---
 
-In this post, we learn how to turn a pdf into a structured text document. To this end, we will use a tool called [GROBID](https://github.com/kermitt2/grobid) which outputs an xml document. This approach has these advantages over OCR techniques to be
+In this post, we learn how to turn a pdf into a structured text document. To this end, we will use a tool called [GROBID](https://github.com/kermitt2/grobid) outputting a corresponding XML document for each pdf. This approach has these advantages over OCR techniques to be
  * light-weighted: computation takes a couple of seconds vs. 3-5 minutes [with tesseract, a state-of-the-art OCR framework](https://github.com/tesseract-ocr/tesseract)
- * easy to use:  you just need to parse xml
- * storage-efficient: the resulting [(tei) xml file](https://tei-c.org/) takes just some kB for an entire paper
+ * easy to use:  you just need to parse XML
+ * storage-efficient: the resulting [(TEI) XML file](https://tei-c.org/) takes just some kB for an entire paper
  * [REST-full](https://en.wikipedia.org/wiki/Representational_state_transfer): GROBID can be run locally or remotely
   
-I'll conclude with a brief discussion of the TEI format which (semi)structures a PDF and of an application of GROBID.
+I'll conclude with a brief discussion of the TEI format (semi)structuring a PDF and with an application of GROBID.
 
 What is GROBID?
 ==
-[GROBID](https://github.com/kermitt2/grobid) stands for GeneRation Of Bibliographic Data. It's a Java tool which transforms a unstructured PDF into a (semi)structured text format. *The* application for GROBID is the analysis of scientific publications. GROBID can extract scholarly units, such as references, affiliations, authors, DOIs, and abstracts by utilizing machine learning and deep learning.
+[GROBID](https://github.com/kermitt2/grobid) stands for GeneRation Of Bibliographic Data. It's a Java tool which transforms a unstructured PDF into a (semi)structured text format. The analysis of scientific publications is *the* application for GROBID. It can extract scholarly units, such as references, affiliations, authors, DOIs, and abstracts by utilizing machine learning and deep learning.
 
 How to set up GROBID?
 ==
@@ -36,14 +36,14 @@ which makes the GROBID service available on port ```8070```.
 
 How to use GROBID
 ==
-GROBID offers a web user interface to interactively submit pdfs. In addition, you can submit your pdfs via a REST api, such as curl or clients from GROBID.
+GROBID offers a web user interface to interactively submit pdfs. In addition, you can invoke these services via a REST API. We discuss both how to use the web user interface and use the REST API, via curl and REST clients from GROBID.
 
-To use the web interface, open <http://localhost:8070> in your browser to do so.
+To use the web interface, open <http://localhost:8070> in your browser.
 We use [this open access publication](https://www.pnas.org/content/105/49/19052/) in the following:
 ```
 Nathan, R., Getz, W. M., Revilla, E., Holyoak, M., Kadmon, R., Saltz, D., & Smouse, P. E. (2008). A movement ecology paradigm for unifying organismal movement research. Proceedings of the National Academy of Sciences, 105(49), 19052-19059.
 ```
-I presume this paper is in your home directory stored as ```papers/nathan_2009_movement_ecology.pdf```.
+I presume this paper is stored in your home directory as ```papers/nathan_2009_movement_ecology.pdf```.
 
 Then, clicking ```TEI``` and uploading the pdf should yield the following:
 ![grobid-web-ui](/assets/images/grobid/grobid_webui.png){: width="600px"}
@@ -54,7 +54,7 @@ You can decide whether you want to
  * or obtain just the paper's references (```Process All References```)
 
 
-After completing generatimg the xml document, you can either inspect the document or download it:
+After completing generating the xml document, you can either inspect the document or download it:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /home/max/code/grobid/grobid-home/schemas/xsd/Grobid.xsd" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -161,29 +161,56 @@ After completing generatimg the xml document, you can either inspect the documen
 </TEI>
 ```
 This document contains already a lot of information about the publication!
-So what is TEI? TEI is a standard with [guidelines on how to encode digital texts](https://www.tei-c.org/release/doc/tei-p5-doc/en/html/index.html), as its name Text Encoding Initative already hints. I'll cover parsing TEI files in another post.
+So what is TEI? TEI stands for Text Encoding Initiative. As its name already hints, TEI is a standard guiding [how to encode digital texts](https://www.tei-c.org/release/doc/tei-p5-doc/en/html/index.html). I'll cover parsing TEI files in another post.
 
 RESTful GROBID
 ===
-If you have many articles, it becomes handy to output the XML documents in an automated way. To do so, we use a REST API. First, let's obtain the same XML by using ```curl```:
+If you have many articles, it becomes handy to output multiple XML documents at the same time in a batch process. To do so, we need to invoke GROBID's REST API to automate this process. First, let's obtain the same XML by using ```curl```:
 ```bash
 $ curl -v --form input=@./nathan_2009_movement_ecology.pdf  localhost:8070/api/processHeaderDocument
 ```
 
-Of course, it's possible to write your own client submit such requests, but GROBID already offers clients in Java, Python and JavaScript to handle a folder of multiple pdfs at the same time. Let's use the [Python client](https://github.com/kermitt2/grobid-client-python):
+Of course, it's possible to write your own client to submit such requests. However, GROBID already offers clients in Java, Python and JavaScript to process multiple pdfs stored in a folder at the same time. Let's use the [Python client](https://github.com/kermitt2/grobid-client-python):
 ```bash
 $ python3 grobid-client.py --n 3 --input ~/papers  --output ~/tei_papers  processFulltextDocument
 ```
 
-The command will concurrently generate TEI xml documents for all PDFs in ```~/papers```. The output will be in ```~/tei_papers```. ```--n 3``` controls how many threads we are using.
+The command will concurrently generate TEI xml documents for all PDFs in ```~/papers```. The output of this call is stored in directory ```~/tei_papers```. We can adjust how many threads we want to use by the parameter ```--n 3```.
 
-After this tutorial, I give a brief overview over an application using GROBID internally.
+
+TEI XML
+===
+In the above example, we got a glimpse on how a header for TEI XML looks like. But how is a TEI XML structured if we extract the entire document? Let's have a look at a stub without any information filled in:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /home/max/code/grobid/grobid-home/schemas/xsd/Grobid.xsd" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <teiHeader xml:lang="en">
+  ...
+  </teiHeader>
+	<text xml:lang="en">
+        <body>
+        ...
+        </body>
+        <back>
+        ...
+        </back>
+    </text>
+</TEI>
+```
+ * ```teiheader``` contains infos about publication date, authors, journal, doi and abstract
+ * ```body``` encompasses the main text including figures and tables
+ * ```back``` anything else like acknowledgments, funding or supplementary materials.
+
+'Nuff said about data format, how about applications?
+Let's have a look where GROBID has been already applied.
 
 Application of GROBID: RobotReviewer
 ===
+![robotreviewer overview](https://static1.squarespace.com/static/579a63146a49638f9c81c322/t/579b7bdccd0f68622187cf43/1469807653664/?format=750w)
 
 Systematic reviews have an important role in clinical trials. One aspect of such reviews is the risk of bias assessment in form of the [PICO (population, intervention, comparators and outcomes) scheme](https://en.wikipedia.org/wiki/PICO_process).
 Automatic reports compiled from publications can be a help to identify how individual papers fall into a PICO scheme. RobotReviewer analyzes such trail characteristics and generates an evidence report.
 
-RobotReviewer internally uses GROBID to generate textual information from PDFs.
+
+To generate text documents from PDFs, RobotReviewer internally uses GROBID.
 
