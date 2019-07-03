@@ -3,6 +3,7 @@ layout: page
 title: About
 permalink: /about/
 ---
+<script src="{{site.baseurl}}/assets/js/foobar_test.js"></script>
 I am [Maximilian Konzack](https://komax.github.io/), a computer scientist who works as a postdoctoral researcher at iDiv. I am keen on many topics: I like programming and  research the best when it's put into code. My interests include:
  * visual analytics
  * programming
