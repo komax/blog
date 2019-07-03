@@ -247,6 +247,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll
+  jekyll-coffeescript
   jekyll-feed (~> 0.6)
   minima-reboot (~> 1.0.26)
   tzinfo-data
