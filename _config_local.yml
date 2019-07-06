@@ -11,7 +11,7 @@ github_username:  komax
 # Build settings
 markdown: kramdown
 #theme: minima
-remote_theme: aterenin/minima-reboot
+remote_theme: komax/minima-reboot
 plugins:
   - jekyll-feed
 
