@@ -20,6 +20,9 @@ gem "github-pages", group: :jekyll_plugins
 # Add Coffescript execution
 gem 'jekyll-coffeescript'
 
+# Ensure that nokogiri is up-to-date.
+gem "nokogiri", ">= 1.8.5"
+
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.6"
