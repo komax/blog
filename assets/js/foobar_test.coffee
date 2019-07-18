@@ -29,3 +29,11 @@ a = arr.splice(0, 2)
 console.log "foobar"
 #console.log a
 [1, 2]
+
+$(document).ready ->
+    console.log("document is ready")
+    $('div.jumbotron').click ->
+        console.log "I am clicked"
+        $(this).before '<div class="div"></div>'
+        return
+    return
